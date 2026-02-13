@@ -22,5 +22,10 @@ p {
   font-size: 2rem;
   line-height: 2.5rem;
   background-color: #dcedc8;
+
+  @include mobile {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
 }
 </style>

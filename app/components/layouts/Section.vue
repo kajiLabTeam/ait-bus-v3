@@ -37,11 +37,23 @@ defineProps<{
     scroll-margin-top: 999px;
   }
 
+  @include mobile {
+    padding: 20px 10px 30px;
+
+    &.is_top {
+      border-radius: 5px;
+    }
+  }
+
   .header {
     margin-bottom: 1.5rem;
 
     .title {
       font-size: 2rem;
+
+      @include mobile {
+        font-size: 1.5rem;
+      }
 
       &::after {
         content: "";

@@ -77,6 +77,11 @@ h3 {
   .to_yakusa_after_the_next {
     font-size: 2rem;
     line-height: 2.5rem;
+
+    @include mobile {
+      font-size: 1.5rem;
+      line-height: 2rem;
+    }
   }
 
   .to_ait_next {

@@ -21,14 +21,11 @@
 .tab_bar {
   padding: 1rem;
   background-color: rgb(247, 247, 247);
-  position: sticky;
-  top: 0;
   border-radius: 5px 5px 0 0;
-
   position: sticky;
   top: 0;
 
-  @media (max-width: 600px) {
+  @include mobile {
     display: none;
   }
 
