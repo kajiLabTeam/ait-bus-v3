@@ -9,6 +9,8 @@
 		"preview": "pnpm run build && wrangler dev",
 		"postinstall": "nuxt prepare",
 		"deploy": "pnpm run build && wrangler deploy",
+		"lint": "eslint .",
+    "lint:fix": "eslint . --fix",
 		"cf-typegen": "wrangler types"
 	},
 	"dependencies": {
@@ -17,10 +19,14 @@
 		"vue-router": "^4.6.4"
 	},
 	"devDependencies": {
+		"@nuxt/eslint": "1.15.1",
 		"@types/node": "^25.2.3",
+		"eslint": "^10.0.0",
 		"h3": "2.0.1-rc.14",
 		"nitro-cloudflare-dev": "^0.2.2",
 		"nitropack": "^2.13.1",
+		"sass": "^1.97.3",
+		"typescript": "^5.9.3",
 		"wrangler": "^4.65.0"
 	}
 }
