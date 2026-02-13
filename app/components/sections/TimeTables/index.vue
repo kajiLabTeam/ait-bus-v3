@@ -24,7 +24,7 @@ const initialSlide = (() => {
 
 <template>
   <LayoutsSection
-    id="schedule"
+    id="timetables"
     title="時刻表"
   >
     <Hooper

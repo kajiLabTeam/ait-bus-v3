@@ -5,16 +5,13 @@
   <nav class="tab_bar">
     <ul>
       <li>
-        <NuxtLink to="#nextbus">次の出発時間</NuxtLink>
+        <a href="#nextbus">次の出発時間</a>
       </li>
       <li>
-        <NuxtLink to="#schedule">今日の運行ダイヤ</NuxtLink>
+        <a href="#schedule">今日の運行ダイヤ</a>
       </li>
       <li>
-        <NuxtLink to="#timetable-ait">[時刻表]八草→大学</NuxtLink>
-      </li>
-      <li>
-        <NuxtLink to="#timetable-yakusa">[時刻表]大学→八草</NuxtLink>
+        <a href="#timetables">時刻表</a>
       </li>
     </ul>
   </nav>

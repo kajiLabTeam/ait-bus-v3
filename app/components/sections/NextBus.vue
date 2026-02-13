@@ -15,6 +15,7 @@ function formatTime(time: [number, number]): string {
   <LayoutsSection
     id="nextbus"
     title="Next Time"
+    :is-top="true"
   >
     <div>
       <h3>

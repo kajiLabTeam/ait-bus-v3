@@ -2,6 +2,7 @@
 defineProps<{
   id: string;
   title: string;
+  isTop?: boolean;
 }>();
 </script>
 
@@ -9,6 +10,7 @@ defineProps<{
   <section
     :id="id"
     class="section"
+    :class="{ is_top: isTop }"
   >
     <div class="header">
       <h2
@@ -28,6 +30,12 @@ defineProps<{
   padding: 20px 20px 40px;
   border-radius: 5px;
   background-color: #ffffff;
+  scroll-margin-top: 100px;
+
+  &.is_top {
+    border-radius: 0 0 5px 5px;
+    scroll-margin-top: 999px;
+  }
 
   .header {
     margin-bottom: 1.5rem;
