@@ -33,4 +33,13 @@ export default defineNuxtConfig({
       },
     },
   },
+
+  app: {
+    head: {
+      title: "愛工大バス時刻案内<非公式>",
+      htmlAttrs: {
+        lang: "ja",
+      },
+    },
+  },
 });
