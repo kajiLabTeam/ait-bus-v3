@@ -3,10 +3,12 @@ import '@/assets/styles/globals.scss';
 </script>
 
 <template>
-  <AppHeader />
+  <CommonAppHeader />
+  <CommonTabBar />
 
   <main class="main">
-    <NextBus />
+    <SectionsNextBus />
+    <SectionsSchedule />
   </main>
 </template>
 
@@ -17,9 +19,9 @@ import '@/assets/styles/globals.scss';
 }
 
 .main {
-  border-radius: 0 0 5px 5px;
-  overflow: hidden;
-  background-color: #ffffff;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
 }
 </style>

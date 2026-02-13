@@ -22,11 +22,10 @@ function formatTime(time: [number, number]): string {
 </script>
 
 <template>
-  <section class="section">
-    <h2 class="title">
-      Next Time
-    </h2>
-
+  <LayoutsSection
+    id="nextbus"
+    title="Next Time"
+  >
     <div>
       <h3>
         八草→大学
@@ -58,29 +57,12 @@ function formatTime(time: [number, number]): string {
         {{ nextBus.toYakusa.afterNext ? formatTime(nextBus.toYakusa.afterNext) : 'ー' }}
       </p>
     </div>
-  </section>
+  </LayoutsSection>
 </template>
 
 <style lang="scss" scoped>
-.section {
-  padding: 20px;
-
-  .title {
-    font-size: 2rem;
-
-    &::after {
-      content: "";
-      margin: 1rem auto 1rem;
-      width: 3.25em;
-      height: 2px;
-      border-radius: 2px;
-      background-image: linear-gradient(90deg, #efa8b0, #a89cc8, #8cc9f0);
-      display: block;
-    }
-  }
-
-  h3 {
-    margin: 2rem 0 1rem;
+h3 {
+    margin: 1rem 0 1rem;
     font-size: 1.5rem;
 
     @include mobile {
@@ -121,5 +103,4 @@ function formatTime(time: [number, number]): string {
   .to_yakusa_after_the_next {
     background-color: rgba(179, 229, 252, 0.5);
   }
-}
 </style>

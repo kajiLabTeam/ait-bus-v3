@@ -6,6 +6,15 @@ import type { Hour, TimeTableToDestination } from '~/types/timetable';
 
 type Time = [hour: number, minute: number];
 
+/**
+ * 指定した日のバス運行モードを取得する
+ * @param day
+ */
+export function getTodayBusMode(day: Dayjs) {
+  const today = day.format('YYYY-MM-DD');
+  return BUS_MODE_MAP?.[today];
+}
+
 interface NextBusResult {
   toYakusa: {
     next: Time | undefined;
@@ -22,8 +31,7 @@ interface NextBusResult {
  * @param day
  */
 export function getNextBus(day: Dayjs): NextBusResult {
-  const today = day.format('YYYY-MM-DD');
-  const todayMode = BUS_MODE_MAP?.[today];
+  const todayMode = getTodayBusMode(day);
 
   // 運休日 / 未登録
   if (todayMode == undefined) {
