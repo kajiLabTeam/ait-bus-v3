@@ -23,4 +23,14 @@ export default defineNuxtConfig({
       },
     },
   },
+
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: '@use "@/styles/modules" as *;',
+        },
+      },
+    },
+  },
 });
