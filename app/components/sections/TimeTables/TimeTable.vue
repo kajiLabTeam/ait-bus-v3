@@ -57,9 +57,7 @@ h3 {
 }
 
 table {
-  margin-inline: auto;
   width: 100%;
-  max-width: 600px;
   border-collapse: collapse;
   font-size: 1rem;
   color: rgb(99, 99, 99);

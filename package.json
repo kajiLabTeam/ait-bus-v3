@@ -15,7 +15,6 @@
 	},
 	"dependencies": {
 		"@nuxt/fonts": "0.13.0",
-		"@wattanx/hooper-vue3": "^1.0.0",
 		"dayjs": "^1.11.19",
 		"nuxt": "^4.3.1",
 		"vue": "^3.5.28",
