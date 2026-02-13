@@ -27,7 +27,10 @@ onUnmounted(() => {
   <main class="main">
     <SectionsNextBus :next-bus="nextBus" />
     <SectionsSchedule :bus-mode="busMode" />
-    <SectionsTimeTables :today-mode="busMode" />
+    <SectionsTimeTables
+      :today-mode="busMode"
+      :next-bus="nextBus"
+    />
   </main>
 </template>
 

@@ -1,9 +1,11 @@
 <script lang="ts" setup>
 import type { Mode } from '~/types/mode';
 import TimeTable from './TimeTable.vue';
+import type { NextBus } from '~/types/timetable';
 
 const { todayMode } = defineProps<{
   todayMode: Mode | undefined;
+  nextBus: NextBus;
 }>();
 
 const sliderRef = ref<HTMLElement | null>(null);
@@ -17,7 +19,7 @@ onMounted(async () => {
       case 'B':
         return 2;
       case 'C':
-        return 1;
+        return 3;
       default:
         return 0;
     }
@@ -45,13 +47,25 @@ onMounted(async () => {
         class="slider"
       >
         <div class="slide">
-          <TimeTable mode="A" />
+          <TimeTable
+            mode="A"
+            :next-bus="nextBus"
+            :is-active="todayMode === 'A'"
+          />
         </div>
         <div class="slide">
-          <TimeTable mode="B" />
+          <TimeTable
+            mode="B"
+            :next-bus="nextBus"
+            :is-active="todayMode === 'B'"
+          />
         </div>
         <div class="slide">
-          <TimeTable mode="C" />
+          <TimeTable
+            mode="C"
+            :next-bus="nextBus"
+            :is-active="todayMode === 'C'"
+          />
         </div>
       </div>
     </div>

@@ -1,17 +1,44 @@
 <script lang="ts" setup>
 import { BUS_TIME_TABLE_MAP } from '~/consts/timetable';
+import type { Destination } from '~/types/destination';
 import type { Mode } from '~/types/mode';
-import type { Hour } from '~/types/timetable';
+import type { Hour, NextBus } from '~/types/timetable';
 
-const { mode } = defineProps<{
+const { mode, nextBus, isActive } = defineProps<{
   mode: Mode;
+  nextBus: NextBus;
+  isActive: boolean;
 }>();
 
 const timetable = computed(() => BUS_TIME_TABLE_MAP[mode]);
+
+function highlightClass(hour: Hour, minute: number, destination: Destination) {
+  if (!isActive) return {};
+
+  const next = nextBus[destination].next;
+  const afterNext = nextBus[destination].afterNext;
+
+  const isNext
+    = next !== undefined
+      && next[0] === hour
+      && next[1] === minute;
+
+  const isAfterNext
+    = afterNext !== undefined
+      && afterNext[0] === hour
+      && afterNext[1] === minute;
+
+  return {
+    highlightNext: isNext,
+    highlightAfterNext: isAfterNext,
+  };
+}
 </script>
 
 <template>
-  <h3>{{ `${mode}ダイヤ` }}</h3>
+  <h3 :class="{ active: isActive }">
+    <span>{{ `${mode}ダイヤ` }}</span>
+  </h3>
   <table>
     <thead>
       <tr>
@@ -32,6 +59,8 @@ const timetable = computed(() => BUS_TIME_TABLE_MAP[mode]);
             <span
               v-for="minute in timetable.toAIT[hour as Hour]"
               :key="minute"
+              class="to_ait"
+              :class="highlightClass(hour as Hour, minute, 'toAIT')"
             >
               {{ minute }}
             </span>
@@ -40,6 +69,8 @@ const timetable = computed(() => BUS_TIME_TABLE_MAP[mode]);
             <span
               v-for="minute in timetable.toYakusa[hour as Hour]"
               :key="minute"
+              class="to_yakusa"
+              :class="highlightClass(hour as Hour, minute, 'toYakusa')"
             >
               {{ minute }}
             </span>
@@ -54,6 +85,18 @@ const timetable = computed(() => BUS_TIME_TABLE_MAP[mode]);
 h3 {
   padding: 1rem;
   font-size: 1.5rem;
+  text-align: center;
+
+  span {
+    padding: 0.5rem 2rem;
+    border-radius: 5px;
+  }
+
+  &.active {
+    span {
+      background-color: #dcedc8;
+    }
+  }
 }
 
 table {
@@ -87,6 +130,20 @@ table {
       display: inline-block;
       width: 2rem;
       text-align: center;
+      border-radius: 3px;
+
+      &.highlightNext.to_ait {
+        background-color: #ffccbc;
+      }
+      &.highlightAfterNext.to_ait {
+        background-color: rgba(255, 204, 188, 0.5);
+      }
+      &.highlightNext.to_yakusa {
+        background-color: #b3e5fc;
+      }
+      &.highlightAfterNext.to_yakusa {
+        background-color: rgba(179, 229, 252, 0.5);
+      }
     }
   }
 }
