@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ['nitro-cloudflare-dev', '@nuxt/eslint'],
-  devtools: { enabled: true },
+  modules: ['nitro-cloudflare-dev', '@nuxt/eslint', '@nuxt/fonts'],
+  devtools: { enabled: false },
 
   app: {
     head: {
@@ -11,6 +11,7 @@ export default defineNuxtConfig({
       },
     },
   },
+
   compatibilityDate: '2025-07-15',
 
   nitro: {
@@ -26,7 +27,7 @@ export default defineNuxtConfig({
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: '@use "@/styles/modules" as *;',
+          additionalData: '@use "@/assets/styles/modules" as *;',
         },
       },
     },
@@ -40,5 +41,14 @@ export default defineNuxtConfig({
         quotes: 'single',
       },
     },
+  },
+
+  fonts: {
+    families: [
+      {
+        name: 'LINE Seed JP',
+        weights: ['100', '400', '700', '900'],
+      },
+    ],
   },
 });
