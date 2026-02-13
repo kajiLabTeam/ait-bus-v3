@@ -1,5 +1,23 @@
 <script lang="ts" setup>
+import dayjs from 'dayjs';
 import '@/assets/styles/globals.scss';
+
+dayjs.locale('ja');
+
+let timer: ReturnType<typeof setInterval>;
+let nextBus = getNextBus(dayjs());
+let busMode = getTodayBusMode(dayjs());
+
+onMounted(() => {
+  timer = setInterval(() => {
+    nextBus = getNextBus(dayjs());
+    busMode = getTodayBusMode(dayjs());
+  }, 1000);
+});
+
+onUnmounted(() => {
+  clearInterval(timer);
+});
 </script>
 
 <template>
@@ -7,8 +25,9 @@ import '@/assets/styles/globals.scss';
   <CommonTabBar />
 
   <main class="main">
-    <SectionsNextBus />
-    <SectionsSchedule />
+    <SectionsNextBus :next-bus="nextBus" />
+    <SectionsSchedule :bus-mode="busMode" />
+    <SectionsTimeTables :today-mode="busMode" />
   </main>
 </template>
 

@@ -11,6 +11,9 @@ importers:
       '@nuxt/fonts':
         specifier: 0.13.0
         version: 0.13.0(db0@0.3.4)(ioredis@5.9.3)(magicast@0.5.2)(vite@7.3.1(@types/node@25.2.3)(jiti@2.6.1)(lightningcss@1.31.1)(sass@1.97.3)(terser@5.46.0)(yaml@2.8.2))
+      '@wattanx/hooper-vue3':
+        specifier: ^1.0.0
+        version: 1.0.0(vue@3.5.28(typescript@5.9.3))
       dayjs:
         specifier: ^1.11.19
         version: 1.11.19
@@ -1990,6 +1993,11 @@ packages:
 
   '@vue/shared@3.5.28':
     resolution: {integrity: sha512-cfWa1fCGBxrvaHRhvV3Is0MgmrbSCxYTXCSCau2I0a1Xw1N1pHAvkWCiXPRAqjvToILvguNyEwjevUqAuBQWvQ==}
+
+  '@wattanx/hooper-vue3@1.0.0':
+    resolution: {integrity: sha512-r4r8z85N+XhhK6qWXd7S6TJYoJPSyqPYwR2gx3sUgmVbULURD3KU71ceA6cxSeoB8xOHXkuSitCuAcRvNXOvtw==}
+    peerDependencies:
+      vue: ^3.0.0
 
   abbrev@3.0.1:
     resolution: {integrity: sha512-AO2ac6pjRB3SJmGJo+v5/aK6Omggp6fsLrs6wN9bd35ulu4cCwaAU9+7ZhXjeqHVkaHThLuzH0nZr0YpCDhygg==}
@@ -6477,6 +6485,10 @@ snapshots:
       vue: 3.5.28(typescript@5.9.3)
 
   '@vue/shared@3.5.28': {}
+
+  '@wattanx/hooper-vue3@1.0.0(vue@3.5.28(typescript@5.9.3))':
+    dependencies:
+      vue: 3.5.28(typescript@5.9.3)
 
   abbrev@3.0.1: {}
 

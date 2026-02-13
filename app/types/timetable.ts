@@ -35,3 +35,16 @@ export type TimeTableToDestination = {
 export type TimeTable = {
   [key in Mode]: TimeTableToDestination
 };
+
+export type Time = [hour: number, minute: number];
+
+export interface NextBus {
+  toYakusa: {
+    next: Time | undefined;
+    afterNext: Time | undefined;
+  };
+  toAIT: {
+    next: Time | undefined;
+    afterNext: Time | undefined;
+  };
+}

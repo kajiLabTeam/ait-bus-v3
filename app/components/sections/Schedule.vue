@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import dayjs from 'dayjs';
+import type { Mode } from '~/types/mode';
 
-dayjs.locale('ja');
-
-const busMode = getTodayBusMode(dayjs());
+defineProps<{
+  busMode: Mode | undefined;
+}>();
 </script>
 
 <template>

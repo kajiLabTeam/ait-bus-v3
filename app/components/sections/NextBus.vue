@@ -1,20 +1,10 @@
 <script lang="ts" setup>
 import dayjs from 'dayjs';
+import type { NextBus } from '~/types/timetable';
 
-dayjs.locale('ja');
-
-let timer: ReturnType<typeof setInterval>;
-let nextBus = getNextBus(dayjs());
-
-onMounted(() => {
-  timer = setInterval(() => {
-    nextBus = getNextBus(dayjs());
-  }, 1000);
-});
-
-onUnmounted(() => {
-  clearInterval(timer);
-});
+defineProps<{
+  nextBus: NextBus;
+}>();
 
 function formatTime(time: [number, number]): string {
   return dayjs().hour(time[0]).minute(time[1]).format('HH:mm');

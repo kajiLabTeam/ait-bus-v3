@@ -2,9 +2,7 @@ import type { Dayjs } from 'dayjs';
 import { DESTINATION } from '~/consts/destination';
 import { BUS_MODE_MAP } from '~/consts/mode';
 import { BUS_TIME_TABLE_MAP } from '~/consts/timetable';
-import type { Hour, TimeTableToDestination } from '~/types/timetable';
-
-type Time = [hour: number, minute: number];
+import type { Hour, NextBus, Time, TimeTableToDestination } from '~/types/timetable';
 
 /**
  * 指定した日のバス運行モードを取得する
@@ -15,22 +13,11 @@ export function getTodayBusMode(day: Dayjs) {
   return BUS_MODE_MAP?.[today];
 }
 
-interface NextBusResult {
-  toYakusa: {
-    next: Time | undefined;
-    afterNext: Time | undefined;
-  };
-  toAIT: {
-    next: Time | undefined;
-    afterNext: Time | undefined;
-  };
-}
-
 /**
  * 指定した日時の次とさらにその次のバスの時刻を取得する
  * @param day
  */
-export function getNextBus(day: Dayjs): NextBusResult {
+export function getNextBus(day: Dayjs): NextBus {
   const todayMode = getTodayBusMode(day);
 
   // 運休日 / 未登録
