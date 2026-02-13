@@ -2,5 +2,14 @@
 	"files.associations": {
 		"wrangler.json": "jsonc"
 	},
-	"eslint.useFlatConfig": true
+	"eslint.useFlatConfig": true,
+	"[vue]": {
+		"editor.defaultFormatter": "dbaeumer.vscode-eslint"
+	},
+	"[typescript]": {
+		"editor.defaultFormatter": "dbaeumer.vscode-eslint"
+	},
+	"[json]": {
+		"editor.defaultFormatter": "dbaeumer.vscode-eslint"
+	},
 }

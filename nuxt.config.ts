@@ -1,26 +1,24 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: "2025-07-15",
+  modules: ['nitro-cloudflare-dev', '@nuxt/eslint'],
   devtools: { enabled: true },
 
+  app: {
+    head: {
+      title: '愛工大バス時刻案内<非公式>',
+      htmlAttrs: {
+        lang: 'ja',
+      },
+    },
+  },
+  compatibilityDate: '2025-07-15',
+
   nitro: {
-    preset: "cloudflare_module",
+    preset: 'cloudflare_module',
 
     cloudflare: {
       deployConfig: true,
       nodeCompat: true,
-    },
-  },
-
-  modules: ["nitro-cloudflare-dev", "@nuxt/eslint"],
-
-  eslint: {
-    config: {
-      stylistic: {
-        indent: 2,
-        semi: true,
-        quotes: "single",
-      },
     },
   },
 
@@ -34,11 +32,12 @@ export default defineNuxtConfig({
     },
   },
 
-  app: {
-    head: {
-      title: "愛工大バス時刻案内<非公式>",
-      htmlAttrs: {
-        lang: "ja",
+  eslint: {
+    config: {
+      stylistic: {
+        indent: 2,
+        semi: true,
+        quotes: 'single',
       },
     },
   },
