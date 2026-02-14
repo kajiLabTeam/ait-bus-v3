@@ -55,7 +55,7 @@ const yearRange: [number, number] = [minDate.year(), maxDate.year()];
         v-else
         class="date_picker_placeholder"
       >
-        <CommonCalendarIcon />
+        <CommonIconsCalendar />
       </div>
     </div>
   </LayoutsSection>

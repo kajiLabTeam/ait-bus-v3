@@ -47,6 +47,13 @@ export default defineNuxtConfig({
     },
   },
 
+  typescript: {
+    typeCheck: true,
+    tsConfig: {
+      include: ['../app/types/global.d.ts'],
+    },
+  },
+
   eslint: {
     config: {
       stylistic: {

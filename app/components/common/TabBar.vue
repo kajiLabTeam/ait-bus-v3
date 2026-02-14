@@ -16,6 +16,9 @@
       <li>
         <a href="#timetables">時刻表</a>
       </li>
+      <li>
+        <a href="#install">アプリ</a>
+      </li>
     </ul>
   </nav>
 </template>

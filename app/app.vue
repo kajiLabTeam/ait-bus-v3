@@ -59,6 +59,7 @@ const nextBus = computed(() => {
       :bus-mode="busMode"
       :next-bus="nextBus"
     />
+    <SectionsPWA />
   </main>
 
   <CommonAppFooter />
