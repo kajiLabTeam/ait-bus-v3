@@ -9,18 +9,48 @@ const { todayMode } = defineProps<{
 }>();
 
 const sliderRef = ref<HTMLElement | null>(null);
+const currentSlide = ref(['A', 'B', 'C'].indexOf(todayMode ?? 'A'));
 
 onMounted(async () => {
   const wrapper = sliderRef.value;
   if (!wrapper) return;
 
-  const slideIndex = ['A', 'B', 'C'].indexOf(todayMode ?? 'A');
-
-  wrapper.children[slideIndex]?.scrollIntoView({
+  wrapper.children[currentSlide.value]?.scrollIntoView({
     behavior: 'instant',
     inline: 'center',
   });
+
+  const slides = Array.from(wrapper.children);
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const index = slides.indexOf(entry.target as Element);
+          if (index !== -1) currentSlide.value = index;
+        }
+      });
+    },
+    {
+      root: wrapper,
+      threshold: 0.6, // 60%以上見えたらフォーカス
+    },
+  );
+
+  slides.forEach(slide => observer.observe(slide));
 });
+
+function scrollToSlide(direction: 'prev' | 'next') {
+  const wrapper = sliderRef.value;
+  if (!wrapper) return;
+
+  const slideWidth = wrapper.children[0]?.clientWidth ?? 0;
+  const scrollAmount = direction === 'prev' ? -slideWidth : slideWidth;
+
+  wrapper.scrollBy({
+    left: scrollAmount,
+    behavior: 'smooth',
+  });
+}
 </script>
 
 <template>
@@ -57,6 +87,21 @@ onMounted(async () => {
           />
         </div>
       </div>
+
+      <div class="pagenation">
+        <button
+          :disabled="currentSlide === 0"
+          @click="scrollToSlide('prev')"
+        >
+          ＜
+        </button>
+        <button
+          :disabled="currentSlide === 2"
+          @click="scrollToSlide('next')"
+        >
+          ＞
+        </button>
+      </div>
     </div>
   </LayoutsSection>
 </template>
@@ -65,6 +110,7 @@ onMounted(async () => {
 .wrapper {
   margin-inline: auto;
   overflow-x: scroll;
+  position: relative;
 
   .slider {
     padding-bottom: 30px;
@@ -88,6 +134,29 @@ onMounted(async () => {
 
       &:last-child {
         margin-right: 1000px;
+      }
+    }
+  }
+
+  .pagenation {
+    padding: 1rem;
+    width: 100%;
+    max-width: 600px;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+
+    button {
+      all: unset;
+      cursor: pointer;
+
+      &:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
       }
     }
   }
