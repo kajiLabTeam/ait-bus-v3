@@ -46,6 +46,11 @@ watch(
 
     await nextTick(); // DOM更新後にスクロール
     currentSlide.value = i;
+  },
+);
+watch(
+  () => currentSlide.value,
+  () => {
     scrollToCurrentSlide();
   },
 );
@@ -72,14 +77,7 @@ function scrollToCurrentSlide() {
 function scrollToSlide(direction: 'prev' | 'next') {
   const wrapper = sliderRef.value;
   if (!wrapper) return;
-
-  const slideWidth = wrapper.children[0]?.clientWidth ?? 0;
-  const scrollAmount = direction === 'prev' ? -slideWidth : slideWidth;
-
-  wrapper.scrollBy({
-    left: scrollAmount,
-    behavior: 'smooth',
-  });
+  currentSlide.value += direction === 'prev' ? -1 : 1;
 }
 </script>
 
