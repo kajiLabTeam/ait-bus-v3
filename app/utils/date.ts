@@ -6,9 +6,19 @@ dayjs.locale('ja');
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-export function getDayjs(from?: Date | string | null) {
-  if (from) return dayjs(from).tz('Asia/Tokyo');
-  return dayjs().tz('Asia/Tokyo');
+interface GetDayjsOptionsFrom {
+  from: Date | string | null;
+}
+interface GetDayjsOptionsSetDate {
+  year: number;
+  month: number;
+  day: number;
+}
+
+export function getDayjs(options?: GetDayjsOptionsFrom | GetDayjsOptionsSetDate): dayjs.Dayjs {
+  if (!options) return dayjs().tz('Asia/Tokyo');
+  if ('from' in options) return dayjs(options.from).tz('Asia/Tokyo');
+  return dayjs().tz('Asia/Tokyo').set('year', options.year).set('month', options.month - 1).set('date', options.day);
 }
 
 export function isToday(date: Date): boolean {
@@ -30,4 +40,23 @@ export function dateToString(date: Date | null): string {
         month: 'long',
         day: 'numeric',
       });
+}
+
+export function parseDate(str: string | undefined): GetDayjsOptionsSetDate | undefined {
+  if (!str) return undefined;
+
+  const match = str.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (!match) return undefined;
+
+  const year = Number(match[1]);
+  const month = Number(match[2]);
+  const day = Number(match[3]);
+
+  // 日付として妥当かチェック
+  const date = new Date(year, month - 1, day);
+  if (date.getFullYear() !== year) return undefined;
+  if (date.getMonth() + 1 !== month) return undefined;
+  if (date.getDate() !== day) return undefined;
+
+  return { year, month, day };
 }

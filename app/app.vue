@@ -2,16 +2,19 @@
 import type { ModelValue } from '@vuepic/vue-datepicker';
 import '@/assets/styles/globals.scss';
 
+const route = useRoute();
+const dateQuery = parseDate(route.query.date as string | undefined);
+
 let timer: ReturnType<typeof setInterval>;
-const todayNextBus = ref(getNextBus(getDayjs()));
-const todayBusMode = ref(getBusMode(getDayjs()));
+const todayNextBus = ref(getNextBus(getDayjs(dateQuery)));
+const todayBusMode = ref(getBusMode(getDayjs(dateQuery)));
 
 const specifiedDate = ref<Date | null>(null);
-const specifiedBusMode = ref(getBusMode(getDayjs(specifiedDate.value)));
+const specifiedBusMode = ref(getBusMode(getDayjs({ from: specifiedDate.value })));
 
 onMounted(() => {
   timer = setInterval(() => {
-    const day = getDayjs();
+    const day = getDayjs(dateQuery);
 
     todayNextBus.value = getNextBus(day);
     todayBusMode.value = getBusMode(day);
@@ -24,7 +27,7 @@ onUnmounted(() => {
 
 const onDateChange = (newDate: ModelValue) => {
   if (!newDate) return;
-  specifiedBusMode.value = getBusMode(getDayjs(newDate.toLocaleString()));
+  specifiedBusMode.value = getBusMode(getDayjs({ from: newDate.toLocaleString() }));
 };
 
 const busMode = computed(() => {
