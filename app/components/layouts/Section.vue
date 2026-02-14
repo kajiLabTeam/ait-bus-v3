@@ -38,7 +38,7 @@ defineProps<{
   }
 
   @include mobile {
-    padding: 20px 10px 30px;
+    padding: 15px 10px 30px;
 
     &.is_top {
       border-radius: 5px;
@@ -47,6 +47,10 @@ defineProps<{
 
   .header {
     margin-bottom: 1.5rem;
+
+    @include mobile {
+      margin-bottom: 1rem;
+    }
 
     .title {
       font-size: 2rem;

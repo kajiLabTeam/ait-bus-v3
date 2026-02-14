@@ -17,7 +17,7 @@ function formatTime(time: [number, number]): string {
     title="Next Time"
     :is-top="true"
   >
-    <div>
+    <div class="to_ait">
       <h3>
         八草→大学
       </h3>
@@ -33,7 +33,7 @@ function formatTime(time: [number, number]): string {
       </p>
     </div>
 
-    <div>
+    <div class="to_yakusa">
       <h3>
         大学→八草
       </h3>
@@ -53,21 +53,29 @@ function formatTime(time: [number, number]): string {
 
 <style lang="scss" scoped>
 h3 {
-    margin: 1rem 0 1rem;
+    padding: 0.5rem 0;
     font-size: 1.5rem;
 
     @include mobile {
-      margin: 1rem 0 1rem;
       font-size: 1.2rem;
     }
   }
 
   h4 {
-    margin: 1rem 0 0.5rem;
+    padding: 1rem 0 0.5rem;
     font-size: 1.5rem;
 
     @include mobile {
+      padding: 0.5rem 0 0.5rem;
       font-size: 1.2rem;
+    }
+  }
+
+  .to_yakusa {
+    margin-top: 2rem;
+
+    @include mobile {
+      margin-top: 1rem;
     }
   }
 
