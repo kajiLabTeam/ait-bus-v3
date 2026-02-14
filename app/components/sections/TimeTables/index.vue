@@ -15,10 +15,14 @@ onMounted(async () => {
   const wrapper = sliderRef.value;
   if (!wrapper) return;
 
-  wrapper.children[currentSlide.value]?.scrollIntoView({
-    behavior: 'instant',
-    inline: 'center',
-  });
+  const slide = wrapper.children[currentSlide.value] as HTMLElement | undefined;
+  if (slide) {
+    const offset = slide.offsetLeft - (wrapper.clientWidth / 2 - slide.clientWidth / 2);
+    wrapper.scrollTo({
+      left: offset,
+      behavior: 'smooth',
+    });
+  }
 
   const slides = Array.from(wrapper.children);
   const observer = new IntersectionObserver(
