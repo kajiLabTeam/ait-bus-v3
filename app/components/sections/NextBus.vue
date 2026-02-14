@@ -12,9 +12,13 @@ function formatTime(time: Time): string {
 function remainingTime(time: Time): string {
   const now = getDayjs();
   const busTime = getDayjs().hour(time[0]).minute(time[1]);
-  const diff = busTime.diff(now, 'minute');
-  if (diff < 0) return '';
-  return `(${diff}分後)`;
+
+  const diffMin = busTime.diff(now, 'minute');
+  if (diffMin < 0) return '';
+
+  const diffHour = Math.floor(diffMin / 60);
+  if (diffHour > 0) return `(${diffHour}時間${diffMin % 60}分後)`;
+  else return `(${diffMin}分後)`;
 }
 </script>
 
