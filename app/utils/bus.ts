@@ -36,8 +36,8 @@ export function getNextBus(day: Dayjs): NextBus {
 
   const timeTable = BUS_TIME_TABLE_MAP[todayMode];
   const busTimes = getBusTimes(timeTable);
-  const toYakusaIndex = busTimes.toYakusa.findIndex(time => isAfter(day, time));
-  const toAITIndex = busTimes.toAIT.findIndex(time => isAfter(day, time));
+  const toYakusaIndex = busTimes.toYakusa.findIndex(time => isAfterOrEqual(day, time));
+  const toAITIndex = busTimes.toAIT.findIndex(time => isAfterOrEqual(day, time));
 
   const nextToYakusa = busTimes.toYakusa[toYakusaIndex];
   const afterNextToYakusa = busTimes.toYakusa[toYakusaIndex === -1 ? -1 : toYakusaIndex + 1];
@@ -76,9 +76,9 @@ function getBusTimes(timeTable: TimeTableToDestination): BusTimes {
   }, { toAIT: [], toYakusa: [] });
 }
 
-function isAfter(base: Dayjs, target: Time) {
+function isAfterOrEqual(base: Dayjs, target: [number, number]) {
   const hour = base.hour();
   const minute = base.minute();
   const [h, m] = target;
-  return h > hour || (h === hour && m > minute);
+  return h > hour || (h === hour && m >= minute);
 }
