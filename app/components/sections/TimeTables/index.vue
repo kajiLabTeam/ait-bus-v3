@@ -11,26 +11,15 @@ const { todayMode } = defineProps<{
 const sliderRef = ref<HTMLElement | null>(null);
 
 onMounted(async () => {
-  await nextTick();
-  const initialSlide = (() => {
-    switch (todayMode) {
-      case 'A':
-        return 1;
-      case 'B':
-        return 2;
-      case 'C':
-        return 3;
-      default:
-        return 0;
-    }
-  })();
-
   const wrapper = sliderRef.value;
   if (!wrapper) return;
 
-  const slideWidth = wrapper.children[0]?.clientWidth;
-  if (!slideWidth) return;
-  wrapper.scrollLeft = (slideWidth + 32) * initialSlide;
+  const slideIndex = ['A', 'B', 'C'].indexOf(todayMode ?? 'A');
+
+  wrapper.children[slideIndex]?.scrollIntoView({
+    behavior: 'instant',
+    inline: 'center',
+  });
 });
 </script>
 
