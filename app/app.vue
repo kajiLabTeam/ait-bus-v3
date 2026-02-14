@@ -1,21 +1,39 @@
 <script lang="ts" setup>
+import type { ModelValue } from '@vuepic/vue-datepicker';
 import '@/assets/styles/globals.scss';
 
 let timer: ReturnType<typeof setInterval>;
-const nextBus = ref(getNextBus(getDayjs()));
-const busMode = ref(getBusMode(getDayjs()));
+const todayNextBus = ref(getNextBus(getDayjs()));
+const todayBusMode = ref(getBusMode(getDayjs()));
+
+const specifiedDate = ref<Date | null>(null);
+const specifiedBusMode = ref(getBusMode(getDayjs(specifiedDate.value)));
 
 onMounted(() => {
   timer = setInterval(() => {
     const day = getDayjs();
 
-    nextBus.value = getNextBus(day);
-    busMode.value = getBusMode(day);
+    todayNextBus.value = getNextBus(day);
+    todayBusMode.value = getBusMode(day);
   }, 1000);
 });
 
 onUnmounted(() => {
   clearInterval(timer);
+});
+
+const onDateChange = (newDate: ModelValue) => {
+  if (!newDate) return;
+  specifiedBusMode.value = getBusMode(getDayjs(newDate.toLocaleString()));
+};
+
+const busMode = computed(() => {
+  if (!specifiedDate.value || isToday(specifiedDate.value)) return todayBusMode.value;
+  return specifiedBusMode.value;
+});
+const nextBus = computed(() => {
+  if (!specifiedDate.value || isToday(specifiedDate.value)) return todayNextBus.value;
+  return null; // 指定日が今日以外の場合、次のバス情報は表示しない
 });
 </script>
 
@@ -24,10 +42,17 @@ onUnmounted(() => {
   <CommonTabBar />
 
   <main class="main">
-    <SectionsNextBus :next-bus="nextBus" />
-    <SectionsSchedule :bus-mode="busMode" />
+    <SectionsNextBus :next-bus="todayNextBus" />
+    <SectionsDateSelect
+      v-model="specifiedDate"
+      @date-change="onDateChange"
+    />
+    <SectionsSchedule
+      :bus-mode="busMode"
+      :date="specifiedDate"
+    />
     <SectionsTimeTables
-      :today-mode="busMode"
+      :bus-mode="busMode"
       :next-bus="nextBus"
     />
   </main>

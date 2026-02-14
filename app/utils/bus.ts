@@ -20,7 +20,7 @@ export function getBusMode(day: Dayjs) {
 export function getNextBus(day: Dayjs): NextBus {
   const todayMode = getBusMode(day);
 
-  // 運休日 / 未登録
+  // 運行なし / 未登録
   if (todayMode == undefined) {
     return {
       toAIT: {

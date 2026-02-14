@@ -3,26 +3,17 @@ import type { Mode } from '~/types/mode';
 import TimeTable from './TimeTable.vue';
 import type { NextBus } from '~/types/timetable';
 
-const { todayMode } = defineProps<{
-  todayMode: Mode | undefined;
-  nextBus: NextBus;
+const { busMode } = defineProps<{
+  busMode: Mode | undefined;
+  nextBus: NextBus | null;
 }>();
 
 const sliderRef = ref<HTMLElement | null>(null);
-const currentSlide = ref(['A', 'B', 'C'].indexOf(todayMode ?? 'A'));
+const currentSlide = ref(busMode ? getModeIndex(busMode) : 0);
 
 onMounted(async () => {
   const wrapper = sliderRef.value;
   if (!wrapper) return;
-
-  const slide = wrapper.children[currentSlide.value] as HTMLElement | undefined;
-  if (slide) {
-    const offset = slide.offsetLeft - (wrapper.clientWidth / 2 - slide.clientWidth / 2);
-    wrapper.scrollTo({
-      left: offset,
-      behavior: 'smooth',
-    });
-  }
 
   const slides = Array.from(wrapper.children);
   const observer = new IntersectionObserver(
@@ -42,6 +33,41 @@ onMounted(async () => {
 
   slides.forEach(slide => observer.observe(slide));
 });
+
+onMounted(() => {
+  scrollToCurrentSlide();
+});
+
+watch(
+  () => busMode,
+  async (newMode) => {
+    const i = getModeIndex(newMode);
+    if (i === -1) return;
+
+    await nextTick(); // DOM更新後にスクロール
+    currentSlide.value = i;
+    scrollToCurrentSlide();
+  },
+);
+
+function getModeIndex(mode: Mode | undefined) {
+  if (!mode) return -1;
+  return ['A', 'B', 'C'].indexOf(mode);
+}
+
+function scrollToCurrentSlide() {
+  const wrapper = sliderRef.value;
+  if (!wrapper) return;
+
+  const slide = wrapper.children[currentSlide.value] as HTMLElement | undefined;
+  if (!slide) return;
+
+  const offset = slide.offsetLeft - (wrapper.clientWidth / 2 - slide.clientWidth / 2);
+  wrapper.scrollTo({
+    left: offset,
+    behavior: 'smooth',
+  });
+}
 
 function scrollToSlide(direction: 'prev' | 'next') {
   const wrapper = sliderRef.value;
@@ -71,23 +97,23 @@ function scrollToSlide(direction: 'prev' | 'next') {
       >
         <div class="slide">
           <TimeTable
-            mode="A"
+            bus-mode="A"
             :next-bus="nextBus"
-            :is-active="todayMode === 'A'"
+            :is-active="busMode === 'A'"
           />
         </div>
         <div class="slide">
           <TimeTable
-            mode="B"
+            bus-mode="B"
             :next-bus="nextBus"
-            :is-active="todayMode === 'B'"
+            :is-active="busMode === 'B'"
           />
         </div>
         <div class="slide">
           <TimeTable
-            mode="C"
+            bus-mode="C"
             :next-bus="nextBus"
-            :is-active="todayMode === 'C'"
+            :is-active="busMode === 'C'"
           />
         </div>
       </div>

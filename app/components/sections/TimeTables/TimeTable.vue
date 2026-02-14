@@ -4,16 +4,16 @@ import type { Destination } from '~/types/destination';
 import type { Mode } from '~/types/mode';
 import type { Hour, NextBus } from '~/types/timetable';
 
-const { mode, nextBus, isActive } = defineProps<{
-  mode: Mode;
-  nextBus: NextBus;
+const { busMode, nextBus, isActive } = defineProps<{
+  busMode: Mode;
+  nextBus: NextBus | null;
   isActive: boolean;
 }>();
 
-const timetable = computed(() => BUS_TIME_TABLE_MAP[mode]);
+const timetable = computed(() => BUS_TIME_TABLE_MAP[busMode]);
 
 function highlightClass(hour: Hour, minute: number, destination: Destination) {
-  if (!isActive) return {};
+  if (!isActive || !nextBus) return {};
 
   const next = nextBus[destination].next;
   const afterNext = nextBus[destination].afterNext;
@@ -37,7 +37,7 @@ function highlightClass(hour: Hour, minute: number, destination: Destination) {
 
 <template>
   <h3 :class="{ active: isActive }">
-    <span>{{ `${mode}ダイヤ` }}</span>
+    <span>{{ `${busMode}ダイヤ` }}</span>
   </h3>
   <table>
     <thead>

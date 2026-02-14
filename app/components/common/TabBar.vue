@@ -8,7 +8,10 @@
         <a href="#nextbus">次の出発時間</a>
       </li>
       <li>
-        <a href="#schedule">今日の運行ダイヤ</a>
+        <a href="#date-select">日付検索</a>
+      </li>
+      <li>
+        <a href="#schedule">運行ダイヤ</a>
       </li>
       <li>
         <a href="#timetables">時刻表</a>
