@@ -1,15 +1,17 @@
 <script lang="ts" setup>
-import date from './utils/date';
+import { getDayjs } from './utils/date';
 import '@/assets/styles/globals.scss';
 
 let timer: ReturnType<typeof setInterval>;
-let nextBus = getNextBus(date);
-let busMode = getTodayBusMode(date);
+const nextBus = ref(getNextBus(getDayjs()));
+const busMode = ref(getTodayBusMode(getDayjs()));
 
 onMounted(() => {
   timer = setInterval(() => {
-    nextBus = getNextBus(date);
-    busMode = getTodayBusMode(date);
+    const day = getDayjs();
+
+    nextBus.value = getNextBus(day);
+    busMode.value = getTodayBusMode(day);
   }, 1000);
 });
 

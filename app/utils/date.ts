@@ -5,6 +5,7 @@ import timezone from 'dayjs/plugin/timezone';
 dayjs.locale('ja');
 dayjs.extend(utc);
 dayjs.extend(timezone);
-const date = dayjs().tz('Asia/Tokyo');
 
-export default date;
+export function getDayjs() {
+  return dayjs().tz('Asia/Tokyo').set('dates', 12);
+}
