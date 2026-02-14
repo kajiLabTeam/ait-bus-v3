@@ -56,6 +56,8 @@ const nextBus = computed(() => {
       :next-bus="nextBus"
     />
   </main>
+
+  <CommonAppFooter />
 </template>
 
 <style lang="scss" scoped>
