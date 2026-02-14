@@ -1,18 +1,17 @@
 <script lang="ts" setup>
-import dayjs from 'dayjs';
-import type { NextBus } from '~/types/timetable';
+import type { NextBus, Time } from '~/types/timetable';
 
 defineProps<{
   nextBus: NextBus;
 }>();
 
-function formatTime(time: [number, number]): string {
-  return dayjs().hour(time[0]).minute(time[1]).format('HH:mm');
+function formatTime(time: Time): string {
+  return getDayjs().hour(time[0]).minute(time[1]).format('HH:mm');
 }
 
-function remainingTime(time: [number, number]): string {
-  const now = dayjs();
-  const busTime = dayjs().hour(time[0]).minute(time[1]);
+function remainingTime(time: Time): string {
+  const now = getDayjs();
+  const busTime = getDayjs().hour(time[0]).minute(time[1]);
   const diff = busTime.diff(now, 'minute');
   if (diff < 0) return '';
   return `(${diff}分後)`;
