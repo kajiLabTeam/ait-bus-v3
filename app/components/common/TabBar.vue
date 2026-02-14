@@ -24,6 +24,7 @@
   border-radius: 5px 5px 0 0;
   position: sticky;
   top: 0;
+  z-index: 1;
 
   @include mobile {
     display: none;
