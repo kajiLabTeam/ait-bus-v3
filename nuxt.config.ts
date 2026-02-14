@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ['nitro-cloudflare-dev', '@nuxt/eslint', '@nuxt/fonts'],
+  modules: ['nitro-cloudflare-dev', '@nuxt/eslint'],
   devtools: { enabled: false },
 
   app: {
@@ -41,14 +41,5 @@ export default defineNuxtConfig({
         quotes: 'single',
       },
     },
-  },
-
-  fonts: {
-    families: [
-      {
-        name: 'LINE Seed JP',
-        weights: ['100', '400', '700', '900'],
-      },
-    ],
   },
 });

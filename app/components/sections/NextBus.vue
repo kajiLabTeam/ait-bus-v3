@@ -91,19 +91,23 @@ function remainingTime(time: [number, number]): string {
 h3 {
     padding: 0.5rem 0;
     font-size: 1.5rem;
+    line-height: 1.2rem;
 
     @include mobile {
       font-size: 1.2rem;
+      line-height: 1.2rem;
     }
   }
 
   h4 {
     padding: 1rem 0 0.5rem;
     font-size: 1.5rem;
+    line-height: 1.5rem;
 
     @include mobile {
       padding: 0.5rem 0 0.5rem;
       font-size: 1.2rem;
+      line-height: 1.2rem;
     }
   }
 

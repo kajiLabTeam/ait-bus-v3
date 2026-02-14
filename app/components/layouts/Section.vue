@@ -54,9 +54,11 @@ defineProps<{
 
     .title {
       font-size: 2rem;
+      line-height: 2rem;
 
       @include mobile {
         font-size: 1.5rem;
+        line-height: 1.5rem;
       }
 
       &::after {
