@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import { VueDatePicker, type ModelValue } from '@vuepic/vue-datepicker';
+import { ja } from 'date-fns/locale';
 import '@vuepic/vue-datepicker/dist/main.css';
+import { BUS_MODE_MAP } from '~/consts/mode';
 
 const { onDateChange } = defineProps<{
   onDateChange: (newDate: ModelValue) => void;
@@ -15,6 +17,17 @@ onMounted(() => {
 });
 
 const format = 'yyyy年M月d日';
+
+const dates = Object.keys(BUS_MODE_MAP);
+const minDate = dates.reduce((min, date) => {
+  const currentDate = getDayjs({ from: date });
+  return currentDate < min ? currentDate : min;
+}, getDayjs({ from: dates[0] }));
+const maxDate = dates.reduce((max, date) => {
+  const currentDate = getDayjs({ from: date });
+  return currentDate > max ? currentDate : max;
+}, getDayjs({ from: dates[0] }));
+const yearRange: [number, number] = [minDate.year(), maxDate.year()];
 </script>
 
 <template>
@@ -27,6 +40,11 @@ const format = 'yyyy年M月d日';
       <VueDatePicker
         v-if="isMounted"
         v-model="dateModel"
+        :locale="ja"
+        :vertical="true"
+        :min-date="minDate.toDate()"
+        :max-date="maxDate.toDate()"
+        :year-range="yearRange"
         :formats="{ input: format, preview: format }"
         :auto-apply="true"
         :time-picker="false"

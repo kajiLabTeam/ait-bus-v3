@@ -7,7 +7,7 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 
 interface GetDayjsOptionsFrom {
-  from: Date | string | null;
+  from: Date | string | null | undefined;
 }
 interface GetDayjsOptionsSetDate {
   year: number;
