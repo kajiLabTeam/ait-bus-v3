@@ -8,7 +8,7 @@ import type { Hour, NextBus, Time, TimeTableToDestination } from '~/types/timeta
  * 指定した日のバス運行モードを取得する
  * @param day
  */
-export function getTodayBusMode(day: Dayjs) {
+export function getBusMode(day: Dayjs) {
   const today = day.format('YYYY-MM-DD');
   return BUS_MODE_MAP?.[today];
 }
@@ -18,7 +18,7 @@ export function getTodayBusMode(day: Dayjs) {
  * @param day
  */
 export function getNextBus(day: Dayjs): NextBus {
-  const todayMode = getTodayBusMode(day);
+  const todayMode = getBusMode(day);
 
   // 運休日 / 未登録
   if (todayMode == undefined) {
