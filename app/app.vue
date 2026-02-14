@@ -41,6 +41,7 @@ const nextBus = computed(() => {
 </script>
 
 <template>
+  <NuxtPwaManifest />
   <CommonAppHeader />
   <CommonTabBar />
 

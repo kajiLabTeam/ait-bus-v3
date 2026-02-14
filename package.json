@@ -11,9 +11,11 @@
 		"deploy": "pnpm run build && wrangler deploy",
 		"lint": "eslint .",
 		"lint:fix": "eslint . --fix",
-		"cf-typegen": "wrangler types"
+		"cf-typegen": "wrangler types",
+		"gen:icons": "pwa-assets-generator --preset minimal-2023 public/icon_1024x1024.png"
 	},
 	"dependencies": {
+		"@vite-pwa/nuxt": "^1.1.1",
 		"@vuepic/vue-datepicker": "^12.1.0",
 		"date-fns": "^4.1.0",
 		"dayjs": "^1.11.19",
