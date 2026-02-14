@@ -30,10 +30,12 @@ export default defineNuxtConfig({
 
   nitro: {
     preset: 'cloudflare_module',
-
     cloudflare: {
       deployConfig: true,
       nodeCompat: true,
+    },
+    prerender: {
+      routes: ['/'],
     },
   },
 
@@ -99,7 +101,9 @@ export default defineNuxtConfig({
       ],
     },
     workbox: {
-      navigateFallback: null,
+      globPatterns: ['**/*.{js,css,html,svg,png,ico,webp,json}'],
+      cleanupOutdatedCaches: true,
+      clientsClaim: true,
     },
   },
 });
