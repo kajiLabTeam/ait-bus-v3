@@ -55,6 +55,7 @@ const yearRange: [number, number] = [minDate.year(), maxDate.year()];
         v-else
         class="date_picker_placeholder"
       >
+        <input class="dp__input dp__input_icon_pad">
         <CommonIconsCalendar />
       </div>
     </div>
@@ -73,13 +74,22 @@ const yearRange: [number, number] = [minDate.year(), maxDate.year()];
 }
 
 .date_picker_placeholder {
-  width: 243.5px;
+  width: 100%;
   height: 38px;
   border-radius: 4px;
   border: 1px solid rgb(221, 221, 221);
   color: var(--dp-text-color);
   box-sizing: border-box;
+  display: inline-block;
   position: relative;
+
+  div {
+    overflow-wrap: break-word;
+    line-break: after-white-space;
+    display: block;
+    --webkit-nbsp-mode: space;
+    --webkit-user-modify: read-write-plaintext-only;
+  }
 
   svg {
     box-sizing: content-box;
