@@ -98,7 +98,7 @@ async function onInstallClick() {
       >
         アプリをインストール
       </button>
-      <p>このボタンから簡単にインストールできます。</p>
+      <p>このボタンからも簡単にインストールできます。</p>
     </div>
   </LayoutsSection>
 </template>
