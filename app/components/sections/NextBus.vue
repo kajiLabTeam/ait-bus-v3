@@ -97,6 +97,7 @@ h3 {
     line-height: 1.2rem;
 
     @include mobile {
+      padding: 0.2rem 0;
       font-size: 1.2rem;
       line-height: 1.2rem;
     }

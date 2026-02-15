@@ -11,6 +11,7 @@
 <style lang="scss" scoped>
 .header {
   padding: 0 0 20px;
+  line-height: 1.6rem;
 
   .title {
     color: $color-on-background;
