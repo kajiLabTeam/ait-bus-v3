@@ -18,9 +18,9 @@
 			"custom_domain": true,
 			"pattern": "v3.bus.kajilab.net",
 		},
-		// {
-		// 	"custom_domain": true,
-		// 	"pattern": "bus.kajilab.net",
-		// },
+		{
+			"custom_domain": true,
+			"pattern": "bus.kajilab.net",
+		},
 	],
 }
