@@ -141,6 +141,7 @@ async function onInstallClick() {
       margin-inline: auto;
       width: 150px;
       text-align: left;
+      cursor: pointer;
     }
 
     .content {
