@@ -1,4 +1,4 @@
-const appName = '愛工大バス時刻案内<非公式>';
+const appName = '愛工大バス時刻案内＜非公式＞';
 const appNameShort = '愛工大バス時刻案内';
 const description = '愛知工業大学のバス時刻案内を非公式に提供しています。';
 
