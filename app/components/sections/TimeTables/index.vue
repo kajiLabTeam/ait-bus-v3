@@ -46,11 +46,6 @@ watch(
 
     await nextTick(); // DOM更新後にスクロール
     currentSlide.value = i;
-  },
-);
-watch(
-  () => currentSlide.value,
-  () => {
     scrollToCurrentSlide();
   },
 );
@@ -58,6 +53,13 @@ watch(
 function getModeIndex(mode: Mode | undefined) {
   if (!mode) return -1;
   return ['A', 'B', 'C'].indexOf(mode);
+}
+
+function scrollToSlide(direction: 'prev' | 'next') {
+  const wrapper = sliderRef.value;
+  if (!wrapper) return;
+  currentSlide.value += direction === 'prev' ? -1 : 1;
+  scrollToCurrentSlide();
 }
 
 function scrollToCurrentSlide() {
@@ -72,12 +74,6 @@ function scrollToCurrentSlide() {
     left: offset,
     behavior: 'smooth',
   });
-}
-
-function scrollToSlide(direction: 'prev' | 'next') {
-  const wrapper = sliderRef.value;
-  if (!wrapper) return;
-  currentSlide.value += direction === 'prev' ? -1 : 1;
 }
 </script>
 
