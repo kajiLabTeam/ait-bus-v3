@@ -16,7 +16,7 @@
       <li>
         <a href="#timetables">時刻表</a>
       </li>
-      <li>
+      <li class="install">
         <a href="#install">アプリ</a>
       </li>
     </ul>
@@ -43,6 +43,12 @@
       padding: 0 1.25em;
       display: inline-block;
       line-height: 2.25em;
+
+      &.install {
+        @media (display-mode: standalone) {
+          display: none;
+        }
+      }
 
       a {
         padding: 0 1.25em;
