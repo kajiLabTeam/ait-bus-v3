@@ -8,7 +8,6 @@ const deferredPrompt = ref<BeforeInstallPromptEvent | null>(null);
 
 onMounted(() => {
   window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
     deferredPrompt.value = e as BeforeInstallPromptEvent;
   });
 });
