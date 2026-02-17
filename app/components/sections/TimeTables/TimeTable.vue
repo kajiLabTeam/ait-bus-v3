@@ -13,10 +13,12 @@ const { busMode, nextBus, isActive } = defineProps<{
 const timetable = computed(() => BUS_TIME_TABLE_MAP[busMode]);
 
 function highlightClass(hour: Hour, minute: number, destination: Destination) {
-  if (!isActive || !nextBus) return {};
+  const nb = nextBus;
 
-  const next = nextBus[destination].next;
-  const afterNext = nextBus[destination].afterNext;
+  if (!isActive || !nb) return {};
+
+  const next = nb[destination].next;
+  const afterNext = nb[destination].afterNext;
 
   const isNext
     = next !== undefined
