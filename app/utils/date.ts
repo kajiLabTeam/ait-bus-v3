@@ -23,7 +23,7 @@ export function getDayjs(options?: GetDayjsOptionsFrom | GetDayjsOptionsSetDate)
 
 export function isToday(date: Date): boolean {
   if (!date) return true;
-  const today = new Date();
+  const today = getDayjs().toDate();
   return date.getDate() === today.getDate()
     && date.getMonth() === today.getMonth()
     && date.getFullYear() === today.getFullYear();
