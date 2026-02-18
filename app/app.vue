@@ -27,7 +27,7 @@ onUnmounted(() => {
 
 const onDateChange = (newDate: ModelValue) => {
   if (!newDate) return;
-  specifiedBusMode.value = getBusMode(getDayjs({ from: newDate.toLocaleString() }));
+  if (typeof newDate === 'string') specifiedBusMode.value = getBusMode(getDayjs({ from: newDate }));
 };
 
 const busMode = computed(() => {

@@ -5,11 +5,13 @@ import timezone from 'dayjs/plugin/timezone';
 dayjs.locale('ja');
 dayjs.extend(utc);
 dayjs.extend(timezone);
+dayjs.tz.setDefault('Asia/Tokyo');
 
 interface GetDayjsOptionsFrom {
   from: Date | string | null | undefined;
 }
 interface GetDayjsOptionsSetDate {
+  overwrite: true;
   year: number;
   month: number;
   day: number;
@@ -18,15 +20,15 @@ interface GetDayjsOptionsSetDate {
 export function getDayjs(options?: GetDayjsOptionsFrom | GetDayjsOptionsSetDate): dayjs.Dayjs {
   if (!options) return dayjs().tz('Asia/Tokyo');
   if ('from' in options) return dayjs(options.from).tz('Asia/Tokyo');
-  return dayjs().tz('Asia/Tokyo').set('year', options.year).set('month', options.month - 1).set('date', options.day);
+  if (options.overwrite === true) return dayjs().tz('Asia/Tokyo').set('year', options.year).set('month', options.month - 1).set('date', options.day);
+  return dayjs().tz('Asia/Tokyo');
 }
 
 export function isToday(date: Date): boolean {
   if (!date) return true;
-  const today = getDayjs().toDate();
-  return date.getDate() === today.getDate()
-    && date.getMonth() === today.getMonth()
-    && date.getFullYear() === today.getFullYear();
+  const today = getDayjs();
+  const target = dayjs(date).tz('Asia/Tokyo');
+  return target.isSame(today, 'day');
 }
 
 export function dateToString(date: Date | null): string {
@@ -58,5 +60,5 @@ export function parseDate(str: string | undefined): GetDayjsOptionsSetDate | und
   if (date.getMonth() + 1 !== month) return undefined;
   if (date.getDate() !== day) return undefined;
 
-  return { year, month, day };
+  return { overwrite: true, year, month, day };
 }

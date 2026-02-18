@@ -4,6 +4,8 @@ const description = '愛知工業大学のバス時刻案内を非公式に提�
 
 export default defineNuxtConfig({
   modules: ['nitro-cloudflare-dev', '@nuxt/eslint', '@vite-pwa/nuxt'],
+
+  ssr: false,
   devtools: { enabled: false },
 
   app: {
